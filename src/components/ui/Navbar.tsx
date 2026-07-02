@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link  from "next/link";
 import { useEffect, useState } from "react";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navLinks = [
   { label: "Services",     href: "/#services"    },
@@ -30,13 +31,11 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0" onClick={close}>
-            <Image
-              src="/logo-white.svg"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${basePath}/logo-white.svg`}
               alt="Atlantic Xchange"
-              width={160}
-              height={46}
               className="h-8 sm:h-9 w-auto"
-              priority
             />
           </Link>
 

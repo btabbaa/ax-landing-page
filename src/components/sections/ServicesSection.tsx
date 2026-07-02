@@ -1,5 +1,6 @@
-import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const services = [
   {
@@ -101,11 +102,10 @@ export default function ServicesSection() {
         {/* Logo strip */}
         <Reveal variant="fade-in" delay={200} duration={800}>
           <div className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-8 sm:py-10 border-t border-gray-100">
-            <Image
-              src="/logo-color.svg"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${basePath}/logo-color.svg`}
               alt="Atlantic Xchange"
-              width={160}
-              height={48}
               className="h-8 sm:h-10 w-auto opacity-80"
             />
             <div className="h-px sm:h-8 sm:w-px bg-gray-200 w-16" />

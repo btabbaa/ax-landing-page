@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link  from "next/link";
 import { useState } from "react";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const links: Record<string, string[]> = {
   Services: ["Person to Person", "Business to Business", "SEPA Transfers", "Currency Exchange"],
@@ -62,11 +63,10 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2 pb-8 sm:pb-0 border-b border-white/[0.06] sm:border-0 mb-2 sm:mb-0">
             <Link href="/" className="inline-block mb-5 sm:mb-6">
-              <Image
-                src="/logo-white.svg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${basePath}/logo-white.svg`}
                 alt="Atlantic Xchange"
-                width={180}
-                height={52}
                 className="h-9 sm:h-10 w-auto"
               />
             </Link>
