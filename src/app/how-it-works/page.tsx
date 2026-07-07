@@ -206,7 +206,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 bg-navy-50">
+        <section id="faq" className="py-20 bg-navy-50 scroll-mt-16">
           <div className="max-w-3xl mx-auto px-6 lg:px-10">
             <Reveal variant="fade-up" duration={700}>
               <div className="text-center mb-14">

@@ -45,6 +45,20 @@ const services = [
     tagBg:  "bg-ax-green-50 text-ax-green-700",
     border: "hover:border-ax-green-200",
   },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round"
+          d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4" />
+      </svg>
+    ),
+    tag:    "FX",
+    title:  "Currency Exchange",
+    desc:   "Exchange currencies at competitive, transparent rates — no hidden fees, whether you're sending money or just converting.",
+    accent: "bg-navy-600",
+    tagBg:  "bg-navy-50 text-navy-600",
+    border: "hover:border-navy-200",
+  },
 ];
 
 export default function ServicesSection() {
@@ -71,8 +85,8 @@ export default function ServicesSection() {
           </Reveal>
         </div>
 
-        {/* Cards — 1 col on mobile, 3 on md+ */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        {/* Cards — 1 col on mobile, 2 on sm/md, 4 on lg+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((svc, i) => (
             <Reveal key={i} variant="fade-up" delay={i * 120} duration={700}>
               <div

@@ -60,9 +60,30 @@ const values = [
 
 const licenses = [
   { name: "FinCEN",       full: "Financial Crimes Enforcement Network",    number: "Registered MSB",     color: "border-navy-300 bg-navy-50" },
-  { name: "NMLS",        full: "Nationwide Multistate Licensing System",   number: "Registered",          color: "border-teal-200 bg-teal-50" },
+  { name: "NMLS",        full: "Nationwide Multistate Licensing System",   number: "NMLS ID # 1544045",   color: "border-teal-200 bg-teal-50" },
   { name: "SSL/TLS",     full: "256-bit Encryption",                       number: "Bank-Grade Security", color: "border-ax-green-200 bg-ax-green-50" },
   { name: "State Lic.",  full: "State Money Transmitter Licenses",         number: "Multi-State",         color: "border-navy-300 bg-navy-50" },
+];
+
+const licensedStates = [
+  { code: "MI", name: "Michigan" },
+  { code: "IL", name: "Illinois" },
+  { code: "NJ", name: "New Jersey" },
+  { code: "TX", name: "Texas" },
+  { code: "VA", name: "Virginia" },
+  { code: "MD", name: "Maryland" },
+  { code: "FL", name: "Florida" },
+];
+
+const additionalRegulators = [
+  {
+    title: "New York",
+    desc:  "Licensed as a money transmitter by the New York State Department of Financial Services.",
+  },
+  {
+    title: "Georgia",
+    desc:  "Licensed by the Georgia Department of Banking and Finance.",
+  },
 ];
 
 const milestones = [
@@ -190,7 +211,7 @@ export default function AboutPage() {
         </section>
 
         {/* Licenses & Compliance */}
-        <section className="py-20 bg-navy-50">
+        <section id="licenses" className="py-20 bg-navy-50 scroll-mt-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <Reveal variant="fade-up" duration={700}>
               <div className="text-center mb-14">
@@ -216,6 +237,57 @@ export default function AboutPage() {
                 </Reveal>
               ))}
             </div>
+
+            {/* Licensed States */}
+            <Reveal variant="fade-up" duration={700}>
+              <div className="bg-white rounded-2xl border border-navy-100 p-7 sm:p-10 mb-8">
+                <div className="text-center mb-8">
+                  <p className="text-teal-600 text-xs font-bold uppercase tracking-[0.15em] mb-3">
+                    Nationwide Coverage
+                  </p>
+                  <h3 className="font-heading font-extrabold text-navy-800 text-2xl sm:text-3xl mb-3">
+                    Licensed Money Transmitter Across the USA
+                  </h3>
+                  <p className="text-gray-500 text-base max-w-2xl mx-auto">
+                    Atlantic Xchange is a licensed money transmitter in a growing number of US states,
+                    with additional regulatory authorization in New York and Georgia.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8">
+                  {licensedStates.map((s, i) => (
+                    <Reveal key={s.code} variant="zoom-in" delay={i * 60} duration={500}>
+                      <div className="bg-navy-50 border border-navy-100 rounded-xl py-4 text-center hover:border-teal-300 hover:bg-teal-50 transition-colors">
+                        <p className="font-heading font-extrabold text-navy-800 text-lg">{s.code}</p>
+                        <p className="text-navy-400 text-[11px] mt-0.5">{s.name}</p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+                  {additionalRegulators.map((r, i) => (
+                    <Reveal key={r.title} variant="fade-up" delay={i * 80} duration={600}>
+                      <div className="flex items-start gap-3 bg-teal-50/60 border border-teal-100 rounded-xl p-4">
+                        <span className="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                        </span>
+                        <div>
+                          <p className="font-heading font-bold text-navy-800 text-sm mb-1">{r.title}</p>
+                          <p className="text-gray-500 text-xs leading-relaxed">{r.desc}</p>
+                        </div>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+
+                <p className="text-navy-400 text-xs text-center leading-relaxed">
+                  NMLS ID # 1544045. All rights reserved. Conditions apply.
+                </p>
+              </div>
+            </Reveal>
 
             <Reveal variant="fade-up" delay={200} duration={600}>
               <div className="bg-navy-800 rounded-2xl p-8 text-white text-center">

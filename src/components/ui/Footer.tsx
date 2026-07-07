@@ -5,13 +5,50 @@ import { useState } from "react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const links: Record<string, string[]> = {
-  Services: ["Person to Person", "Business to Business", "SEPA Transfers", "Currency Exchange"],
-  Company:  ["About Us", "How It Works", "Rates & Fees", "Compliance & Licenses"],
-  Support:  ["Contact Us", "FAQ", "Track Transfer", "Partner Program"],
+type FooterLink = { label: string; href: string };
+
+const links: Record<string, FooterLink[]> = {
+  Services: [
+    { label: "Person to Person",     href: "/#services" },
+    { label: "Business to Business", href: "/#services" },
+    { label: "SEPA Transfers",       href: "/#services" },
+    { label: "Currency Exchange",    href: "/#services" },
+  ],
+  Company: [
+    { label: "About Us",              href: "/about" },
+    { label: "How It Works",          href: "/how-it-works" },
+    { label: "Rates & Fees",          href: "/rates" },
+    { label: "Compliance & Licenses", href: "/about#licenses" },
+  ],
+  Support: [
+    { label: "Contact Us",      href: "mailto:support@atlanticxchange.com" },
+    { label: "FAQ",             href: "/how-it-works#faq" },
+    { label: "Find a Location", href: "/locations" },
+    { label: "Track Transfer",  href: "/track" },
+    { label: "Partner Program", href: "/#partners" },
+  ],
+  Legal: [
+    { label: "Terms & Conditions",  href: "/legal/terms" },
+    { label: "Privacy Policy",      href: "/legal/privacy" },
+    { label: "Privacy Disclosure",  href: "/legal/privacy-disclosure" },
+    { label: "Terms Of Use",        href: "/legal/terms-of-use" },
+  ],
 };
 
-function FooterLinkGroup({ category, items }: { category: string; items: string[] }) {
+const offices = [
+  {
+    city:  "Dearborn",
+    lines: ["5846 Schaefer Rd", "Dearborn, MI 48126"],
+    phone: "+1 (313)-447-0502",
+  },
+  {
+    city:  "Chicago",
+    lines: ["2551 W Devon Ave", "Chicago, IL 60659"],
+    phone: "+1 (773) 961-7366",
+  },
+];
+
+function FooterLinkGroup({ category, items }: { category: string; items: FooterLink[] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -43,10 +80,10 @@ function FooterLinkGroup({ category, items }: { category: string; items: string[
         }`}
       >
         {items.map((item) => (
-          <li key={item}>
-            <a href="#" className="text-white/45 text-sm hover:text-white transition-colors block py-0.5">
-              {item}
-            </a>
+          <li key={item.label}>
+            <Link href={item.href} className="text-white/45 text-sm hover:text-white transition-colors block py-0.5">
+              {item.label}
+            </Link>
           </li>
         ))}
       </ul>
@@ -58,7 +95,7 @@ export default function Footer() {
   return (
     <footer className="bg-navy-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-12 sm:pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0 sm:gap-10 mb-8 sm:mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:items-end gap-0 sm:gap-10 mb-8 sm:mb-14">
 
           {/* Brand column */}
           <div className="lg:col-span-2 pb-8 sm:pb-0 border-b border-white/[0.06] sm:border-0 mb-2 sm:mb-0">
@@ -75,21 +112,65 @@ export default function Footer() {
               fast, affordable, and reliable.
             </p>
             <div className="space-y-1.5 text-sm text-white/45">
-              <p>FinCEN Licensed · NMLS Registered</p>
-              <p>256-bit SSL Encryption</p>
+             
               <a href="mailto:info@atlanticxchange.com"
                 className="hover:text-white transition-colors block">
                 info@atlanticxchange.com
               </a>
             </div>
+
+            {/* Office locations */}
+            <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-6">
+              {offices.map((office) => (
+                <div key={office.city}>
+                  <h4 className="text-white font-semibold text-xs uppercase tracking-widest mb-3">
+                    {office.city}
+                  </h4>
+                  <address className="not-italic space-y-1 text-sm text-white/45">
+                    {office.lines.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                    <a
+                      href={`tel:${office.phone.replace(/[^+\d]/g, "")}`}
+                      className="hover:text-white transition-colors block"
+                    >
+                      {office.phone}
+                    </a>
+                  </address>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/locations"
+              className="inline-flex items-center gap-1.5 mt-5 text-teal-400 text-sm font-semibold hover:text-teal-300 transition-colors"
+            >
+              See all locations
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
 
           {/* Link columns */}
-          <div className="sm:col-span-2 lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-0 sm:gap-8">
-            {(Object.entries(links) as [string, string[]][]).map(([category, items]) => (
+          <div className="sm:col-span-2 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 sm:gap-6 lg:gap-8">
+            {(Object.entries(links) as [string, FooterLink[]][]).map(([category, items]) => (
               <FooterLinkGroup key={category} category={category} items={items} />
             ))}
           </div>
+        </div>
+
+        {/* Licensing disclosure */}
+        <div className="border-t border-white/[0.08] pt-6 pb-6">
+          <p className="text-white/35 text-[11px] sm:text-xs leading-relaxed max-w-4xl">
+            Atlantic Xchange is licensed as a money transmitter in{" "}
+            <Link href="/about#licenses" className="text-white/50 hover:text-white transition-colors">
+              MI, IL, NJ, TX, VA, MD &amp; FL
+            </Link>
+            . Licensed as a money transmitter by the New York State Department of Financial
+            Services. Licensed by the Georgia Department of Banking and Finance.
+            NMLS ID # 1544045. All rights reserved. Conditions apply.
+          </p>
         </div>
 
         <div className="border-t border-white/[0.08] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -97,11 +178,11 @@ export default function Footer() {
             © {new Date().getFullYear()} Atlantic Xchange. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-5">
-            {["Privacy Policy", "Terms of Service", "Licenses"].map((l) => (
-              <a key={l} href="#"
+            {links.Legal.map((l) => (
+              <Link key={l.label} href={l.href}
                 className="text-white/30 text-xs hover:text-white/60 transition-colors">
-                {l}
-              </a>
+                {l.label}
+              </Link>
             ))}
           </div>
         </div>

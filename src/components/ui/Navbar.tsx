@@ -7,10 +7,12 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navLinks = [
   { label: "Services",     href: "/#services"    },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Rates",        href: "/rates"        },
   { label: "Partners",     href: "/#partners"    },
   { label: "About",        href: "/about"        },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Rates",        href: "/rates"        },
+  { label: "Track Transfer", href: "/track"      },
+  { label: "Locations",    href: "/locations"    },
 ];
 
 export default function Navbar() {
