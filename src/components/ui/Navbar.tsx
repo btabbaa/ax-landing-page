@@ -1,30 +1,40 @@
 "use client";
 
-import Link  from "next/link";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navLinks = [
-  { label: "Services",     href: "/#services"    },
-  { label: "Partners",     href: "/#partners"    },
-  { label: "About",        href: "/about"        },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Rates",        href: "/rates"        },
-  { label: "Track Transfer", href: "/track"      },
-  { label: "Locations",    href: "/locations"    },
+  { label: "Services",       href: "/services"    },
+  { label: "Partners",       href: "/partners"    },
+  { label: "About",          href: "/about"       },
+  { label: "How It Works",   href: "/how-it-works" },
+  { label: "Rates",          href: "/rates"       },
+  { label: "Track Transfer", href: "/track"       },
+  { label: "Locations",      href: "/locations"   },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
-  /* Lock body scroll when menu is open */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   const close = () => setOpen(false);
+
+  const handleSendClick = (e: React.MouseEvent) => {
+    close();
+    const baselessPath = pathname.replace(basePath, "") || "/";
+    if (baselessPath === "/") {
+      e.preventDefault();
+      document.getElementById("send")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -62,16 +72,16 @@ export default function Navbar() {
             >
               Sign In
             </Link>
-            <Link
-              href="#send"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-ax-green-500 hover:bg-ax-green-600 active:bg-ax-green-700 text-white font-semibold text-sm transition-colors duration-150"
-              onClick={close}
+            <a
+              href="/#send"
+              onClick={handleSendClick}
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-ax-green-500 hover:bg-ax-green-600 active:bg-ax-green-700 text-white font-semibold text-sm transition-colors duration-150 cursor-pointer"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
               Send Money
-            </Link>
+            </a>
 
             {/* Hamburger */}
             <button
@@ -129,16 +139,16 @@ export default function Navbar() {
             >
               Sign In
             </Link>
-            <Link
-              href="#send"
-              onClick={close}
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-ax-green-500 hover:bg-ax-green-600 text-white font-bold text-sm transition-colors"
+            <a
+              href="/#send"
+              onClick={handleSendClick}
+              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-ax-green-500 hover:bg-ax-green-600 text-white font-bold text-sm transition-colors cursor-pointer"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
               Send Money
-            </Link>
+            </a>
           </div>
         </div>
       </div>

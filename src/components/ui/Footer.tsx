@@ -9,10 +9,10 @@ type FooterLink = { label: string; href: string };
 
 const links: Record<string, FooterLink[]> = {
   Services: [
-    { label: "Person to Person",     href: "/#services" },
-    { label: "Business to Business", href: "/#services" },
-    { label: "SEPA Transfers",       href: "/#services" },
-    { label: "Currency Exchange",    href: "/#services" },
+    { label: "Person to Person",     href: "/services" },
+    { label: "Business to Business", href: "/services" },
+    { label: "SEPA Transfers",       href: "/services" },
+    { label: "Currency Exchange",    href: "/services" },
   ],
   Company: [
     { label: "About Us",              href: "/about" },
@@ -25,7 +25,7 @@ const links: Record<string, FooterLink[]> = {
     { label: "FAQ",             href: "/how-it-works#faq" },
     { label: "Find a Location", href: "/locations" },
     { label: "Track Transfer",  href: "/track" },
-    { label: "Partner Program", href: "/#partners" },
+    { label: "Partner Program", href: "/partners" },
   ],
   Legal: [
     { label: "Terms & Conditions",  href: "/legal/terms" },

@@ -1,3 +1,4 @@
+import Link  from "next/link";
 import Reveal from "@/components/ui/Reveal";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -113,9 +114,24 @@ export default function ServicesSection() {
           ))}
         </div>
 
+        {/* CTA */}
+        <Reveal variant="fade-up" delay={150} duration={700}>
+          <div className="mt-10 sm:mt-14 text-center">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-navy-800 hover:bg-navy-700 text-white font-semibold text-sm transition-colors"
+            >
+              View All Services
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </Reveal>
+
         {/* Logo strip */}
         <Reveal variant="fade-in" delay={200} duration={800}>
-          <div className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-8 sm:py-10 border-t border-gray-100">
+          <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-8 sm:py-10 border-t border-gray-100">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${basePath}/logo-color.svg`}

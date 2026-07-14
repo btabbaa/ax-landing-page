@@ -1,3 +1,4 @@
+import Link  from "next/link";
 import Reveal from "@/components/ui/Reveal";
 
 const stats = [
@@ -154,6 +155,21 @@ export default function PartnersSection() {
             </Reveal>
           ))}
         </div>
+
+        {/* CTA */}
+        <Reveal variant="fade-up" delay={150} duration={700}>
+          <div className="mt-10 sm:mt-14 text-center">
+            <Link
+              href="/partners"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/20 hover:bg-white/10 text-white font-semibold text-sm transition-colors"
+            >
+              View Full Partner Program
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </Reveal>
 
       </div>
     </section>
