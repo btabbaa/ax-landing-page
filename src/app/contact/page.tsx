@@ -10,13 +10,14 @@ import {
   INFO_EMAIL,
   PHONE_DEARBORN,
   PHONE_CHICAGO,
+  WHATSAPP,
   WHATSAPP_URL,
 } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact & Support — Atlantic Xchange",
   description:
-    "Reach Atlantic Xchange by email, WhatsApp, or phone. Our support team is ready to help with transfers, accounts, and branch questions.",
+    "Reach Atlantic Xchange by email, 24-hour WhatsApp, or phone. Our support team is ready to help with transfers, accounts, and branch questions.",
 };
 
 const channels = [
@@ -39,11 +40,11 @@ const channels = [
   {
     key:   "whatsapp",
     title: "WhatsApp",
-    tag:   "Chat with us",
-    desc:  "Message our team on WhatsApp for a faster conversation — ideal if you already have a reference number or screenshot.",
+    tag:   "24-hour support",
+    desc:  "Message us any time, day or night. 24-hour WhatsApp support for transfers, accounts, and pickup questions.",
     href:  WHATSAPP_URL,
     cta:   "Open WhatsApp",
-    value: PHONE_DEARBORN.display,
+    value: WHATSAPP.display,
     color: "bg-ax-green-500",
     external: true,
     icon: (
@@ -105,7 +106,7 @@ export default function ContactPage() {
           eyebrow="Contact & Support"
           title="How Can We "
           highlight="Help You?"
-          subtitle="Reach us by email, WhatsApp, or phone — whichever is easiest. Real people, real answers, no runaround."
+          subtitle="Reach us by email, 24-hour WhatsApp, or phone — whichever is easiest. Real people, real answers, no runaround."
           accentColor="green"
         />
 
@@ -117,7 +118,7 @@ export default function ContactPage() {
                   Support Channels
                 </p>
                 <h2 className="font-heading font-extrabold text-navy-800 text-3xl sm:text-4xl">
-                  Email, WhatsApp, or a phone call
+                  Email, 24-hour WhatsApp, or a phone call
                 </h2>
               </div>
             </Reveal>

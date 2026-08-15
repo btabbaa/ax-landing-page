@@ -306,7 +306,7 @@ export default function LocationsSection() {
 
                       <p className="text-gray-400 text-xs mt-4 leading-relaxed">
                         Full addresses and hours for flagship branches are listed below. For a nearby
-                        partner agent, call or WhatsApp us — we&apos;ll share the closest location.
+                        partner agent, call us or message 24-hour WhatsApp support — we&apos;ll share the closest location.
                       </p>
                       <div className="mt-4 flex flex-col sm:flex-row gap-2">
                         <a
@@ -321,7 +321,7 @@ export default function LocationsSection() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-2 bg-white border border-navy-100 hover:border-teal-300 text-navy-800 font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors"
                         >
-                          WhatsApp
+                          WhatsApp 24/7
                         </a>
                         <Link
                           href="/contact"

@@ -2,7 +2,7 @@
 
 import Link  from "next/link";
 import { useState } from "react";
-import { PHONE_DEARBORN, SUPPORT_EMAIL, WHATSAPP_URL } from "@/lib/contact";
+import { PHONE_DEARBORN, SOCIALS, SUPPORT_EMAIL, WHATSAPP_URL } from "@/lib/contact";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -26,7 +26,7 @@ const links: Record<string, FooterLink[]> = {
   Support: [
     { label: "Contact Us",  href: "/contact" },
     { label: "Email",       href: `mailto:${SUPPORT_EMAIL}`, external: true },
-    { label: "WhatsApp",    href: WHATSAPP_URL, external: true },
+    { label: "WhatsApp 24/7", href: WHATSAPP_URL, external: true },
     { label: "Phone Call",  href: `tel:${PHONE_DEARBORN.tel}`, external: true },
     { label: "FAQ",         href: "/how-it-works#faq" },
     { label: "Track Transfer", href: "/track" },
@@ -51,6 +51,30 @@ const offices = [
     phone: "+1 (773) 961-7366",
   },
 ];
+
+function SocialIcon({ name }: { name: string }) {
+  if (name === "Instagram") {
+    return (
+      <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
+  if (name === "Facebook") {
+    return (
+      <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.94 8.5a1.94 1.94 0 11.01-3.88 1.94 1.94 0 01-.01 3.88zM5.25 10.2h3.38V20H5.25V10.2zm5.4 0h3.24v1.34h.05c.45-.85 1.56-1.75 3.21-1.75 3.43 0 4.07 2.26 4.07 5.2V20h-3.38v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.26-1.87 2.56V20h-3.38V10.2z" />
+    </svg>
+  );
+}
 
 function FooterLinkGroup({ category, items }: { category: string; items: FooterLink[] }) {
   const [open, setOpen] = useState(false);
@@ -126,11 +150,25 @@ export default function Footer() {
               fast, affordable, and reliable.
             </p>
             <div className="space-y-1.5 text-sm text-white/45">
-             
               <a href="mailto:info@atlanticxchange.com"
                 className="hover:text-white transition-colors block">
                 info@atlanticxchange.com
               </a>
+            </div>
+
+            <div className="flex items-center gap-2.5 mt-5">
+              {SOCIALS.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="w-10 h-10 rounded-xl border border-white/10 text-white/55 hover:text-white hover:border-white/25 hover:bg-white/[0.06] flex items-center justify-center transition-colors"
+                >
+                  <SocialIcon name={s.label} />
+                </a>
+              ))}
             </div>
 
             {/* Office locations */}

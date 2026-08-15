@@ -100,23 +100,27 @@ export default function HeroSection() {
 
             <Reveal variant="fade-up" delay={220} duration={700}>
               <p className="text-white/60 text-base sm:text-lg max-w-md leading-relaxed mb-8">
-                Atlantic Xchange delivers your money faster, cheaper, and more
-                reliably — with the best exchange rates in the market. No surprises.
+              Move money across borders with competitive exchange rates, transparent fees,
+              and reliable delivery — all from one trusted platform.
               </p>
             </Reveal>
 
-            {/* Stats — 2×2 on mobile, row on lg */}
+            {/* Stats — equal 2×2 on mobile and desktop */}
             <Reveal variant="fade-up" delay={340} duration={700}>
-              <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-6 sm:gap-8 mb-8">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-7 max-w-lg lg:max-w-xl mb-8">
                 {[
-                  { value: "150+",  label: "Countries" },
-                  { value: "$0",    label: "Hidden Fees" },
-                  { value: "24h",   label: "Avg. Delivery" },
-                  { value: "99.9%", label: "Uptime" },
+                  { value: "150+ Countries",    label: "Send money worldwide" },
+                  { value: "Transparent Fees",  label: "Know exactly what you pay" },
+                  { value: "Fast Delivery",     label: "Get your money there quickly" },
+                  { value: "Licensed & Secure", label: "Your money is protected" },
                 ].map((s) => (
-                  <div key={s.label}>
-                    <p className="font-heading font-extrabold text-3xl text-white leading-none">{s.value}</p>
-                    <p className="text-white/40 text-xs mt-1 uppercase tracking-wider">{s.label}</p>
+                  <div key={s.value} className="min-w-0">
+                    <p className="font-heading font-extrabold text-white text-[1.15rem] sm:text-xl leading-tight">
+                      {s.value}
+                    </p>
+                    <p className="text-white/40 text-xs sm:text-sm mt-1.5 leading-snug">
+                      {s.label}
+                    </p>
                   </div>
                 ))}
               </div>

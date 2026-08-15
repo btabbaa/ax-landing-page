@@ -3,20 +3,20 @@ import Reveal from "@/components/ui/Reveal";
 const steps = [
   {
     number: "01",
-    title:  "Enter Amount & Destination",
-    desc:   "Use our real-time calculator to enter the amount and select the recipient's country. See exactly what arrives — before you send a single dollar.",
+    title:  "Choose",
+    desc:   "Enter the amount and destination.",
     color:  "bg-navy-800",
   },
   {
     number: "02",
-    title:  "Quick Identity Verification",
-    desc:   "A one-time KYC check — upload your ID and a selfie in under 5 minutes. Done once, never again.",
+    title:  "Confirm",
+    desc:   "Verify your identity and review your transfer.",
     color:  "bg-teal-600",
   },
   {
     number: "03",
-    title:  "Send & Track in Real Time",
-    desc:   "Confirm and pay. Your recipient is notified instantly. Track every step until it arrives.",
+    title:  "Send",
+    desc:   "Pay, send, and track your money.",
     color:  "bg-ax-green-500",
   },
 ];
@@ -30,14 +30,13 @@ export default function HowItWorksSection() {
         <Reveal variant="fade-up" duration={700}>
           <div className="text-center mb-12 sm:mb-16">
             <p className="text-teal-600 text-xs font-bold uppercase tracking-[0.15em] mb-4">
-              Simple Process
+              How It Works
             </p>
             <h2 className="font-heading font-extrabold text-navy-800 text-3xl sm:text-4xl lg:text-5xl mb-4">
-              3 Steps to Send Money
+              3 simple steps
             </h2>
             <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-              From registration to delivery — the fastest and most transparent
-              money transfer experience available.
+              Sending money is straightforward — choose, confirm, and send.
             </p>
           </div>
         </Reveal>
@@ -76,7 +75,7 @@ export default function HowItWorksSection() {
         <Reveal variant="fade-up" delay={300} duration={600}>
           <div className="text-center mt-10 sm:mt-14">
             <a
-              href="#send"
+              href="/#send"
               className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold text-base px-8 py-4 rounded-xl transition-colors duration-150 touch-manipulation"
             >
               Start Sending Now
