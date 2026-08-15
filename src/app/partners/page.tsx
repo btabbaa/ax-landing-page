@@ -4,7 +4,7 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import Footer         from "@/components/ui/Footer";
 import PageHero       from "@/components/ui/PageHero";
 import Reveal         from "@/components/ui/Reveal";
-import Link           from "next/link";
+import { PARTNERS_EMAIL, PHONE_DEARBORN, WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Partner Program — Atlantic Xchange",
@@ -38,8 +38,6 @@ const partnerTypes = [
       </svg>
     ),
     color:   "bg-teal-600",
-    cta:     "Apply as an Agent",
-    subject: "Agent Partnership Inquiry",
   },
   {
     key:   "provider",
@@ -59,8 +57,6 @@ const partnerTypes = [
       </svg>
     ),
     color:   "bg-ax-green-500",
-    cta:     "Apply as a Provider",
-    subject: "Provider Partnership Inquiry",
   },
   {
     key:   "white-label",
@@ -80,8 +76,6 @@ const partnerTypes = [
       </svg>
     ),
     color:   "bg-navy-600",
-    cta:     "Talk to Us About White-Label",
-    subject: "White-Label Partnership Inquiry",
   },
 ];
 
@@ -188,15 +182,14 @@ export default function PartnersPage() {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href={`mailto:partners@atlanticxchange.com?subject=${encodeURIComponent(p.subject)}`}
-                      className="inline-flex items-center justify-center gap-2 border border-white/20 hover:bg-white/10 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors duration-150"
-                    >
-                      {p.cta}
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
+                    <div className="mt-auto space-y-2 text-sm">
+                      <a href={`mailto:${PARTNERS_EMAIL}`} className="block text-white/80 hover:text-white transition-colors">
+                        {PARTNERS_EMAIL}
+                      </a>
+                      <a href={`tel:${PHONE_DEARBORN.tel}`} className="block text-white/80 hover:text-white transition-colors">
+                        {PHONE_DEARBORN.display}
+                      </a>
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -241,15 +234,28 @@ export default function PartnersPage() {
               <p className="text-white/55 text-base sm:text-lg mb-8 leading-relaxed">
                 Reach out to our partnerships team and we&apos;ll find the right fit for your business.
               </p>
-              <a
-                href="mailto:partners@atlanticxchange.com"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-ax-green-500 hover:bg-ax-green-600 text-white font-bold text-sm transition-colors"
-              >
-                Contact Our Partnerships Team
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href={`mailto:${PARTNERS_EMAIL}`}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-ax-green-500 hover:bg-ax-green-600 text-white font-bold text-sm transition-colors"
+                >
+                  {PARTNERS_EMAIL}
+                </a>
+                <a
+                  href={`tel:${PHONE_DEARBORN.tel}`}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 hover:bg-white/10 text-white font-semibold text-sm transition-colors"
+                >
+                  {PHONE_DEARBORN.display}
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 hover:bg-white/10 text-white font-semibold text-sm transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </Reveal>
         </section>

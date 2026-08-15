@@ -6,9 +6,11 @@ import Reveal from "@/components/ui/Reveal";
 const countries = [
   { flag: "🇯🇴", name: "Jordan",       code: "JOD", rate: 0.7095 },
   { flag: "🇪🇬", name: "Egypt",        code: "EGP", rate: 30.85  },
-  { flag: "🇸🇦", name: "Saudi Arabia", code: "SAR", rate: 3.7498 },
+  { flag: "🇸🇾", name: "Syria",        code: "SYP", rate: 13000  },
   { flag: "🇦🇪", name: "UAE",          code: "AED", rate: 3.6724 },
   { flag: "🇮🇶", name: "Iraq",         code: "IQD", rate: 1308   },
+  { flag: "🇧🇩", name: "Bangladesh",   code: "BDT", rate: 121.80 },
+  { flag: "🇨🇳", name: "China",        code: "CNY", rate: 7.2450 },
   { flag: "🇲🇦", name: "Morocco",      code: "MAD", rate: 10.08  },
   { flag: "🇵🇰", name: "Pakistan",     code: "PKR", rate: 277.5  },
   { flag: "🇳🇬", name: "Nigeria",      code: "NGN", rate: 1620   },

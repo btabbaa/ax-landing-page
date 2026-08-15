@@ -6,9 +6,11 @@ import Reveal from "@/components/ui/Reveal";
 const countries = [
   { flag: "🇯🇴", name: "Jordan",       code: "JOD", rate: 0.7095, trend: "+0.2%",  minFee: 2.99, time: "Same day",   popular: true  },
   { flag: "🇪🇬", name: "Egypt",        code: "EGP", rate: 30.85,  trend: "+1.1%",  minFee: 2.99, time: "1–2 hours", popular: true  },
-  { flag: "🇸🇦", name: "Saudi Arabia", code: "SAR", rate: 3.7498, trend: "0.0%",   minFee: 2.99, time: "1–2 hours", popular: true  },
+  { flag: "🇸🇾", name: "Syria",        code: "SYP", rate: 13000,  trend: "+0.4%",  minFee: 2.99, time: "24 hours",  popular: true  },
   { flag: "🇦🇪", name: "UAE",          code: "AED", rate: 3.6724, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
   { flag: "🇮🇶", name: "Iraq",         code: "IQD", rate: 1308,   trend: "0.0%",   minFee: 2.99, time: "24 hours", popular: true  },
+  { flag: "🇧🇩", name: "Bangladesh",   code: "BDT", rate: 121.80, trend: "+0.3%",  minFee: 2.99, time: "1–2 hours", popular: true  },
+  { flag: "🇨🇳", name: "China",        code: "CNY", rate: 7.2450, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
   { flag: "🇲🇦", name: "Morocco",      code: "MAD", rate: 10.08,  trend: "+0.3%",  minFee: 2.99, time: "24 hours", popular: false },
   { flag: "🇹🇳", name: "Tunisia",      code: "TND", rate: 3.1105, trend: "+0.4%",  minFee: 2.99, time: "24 hours", popular: false },
   { flag: "🇵🇰", name: "Pakistan",     code: "PKR", rate: 277.5,  trend: "+1.8%",  minFee: 2.99, time: "1–2 hours", popular: false },

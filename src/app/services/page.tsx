@@ -29,7 +29,7 @@ const services = [
       "Send to 150+ countries from the USA",
       "Cash pickup or direct bank deposit",
       "Real-time exchange rates — no hidden markups",
-      "Transfers delivered in as little as minutes",
+      "Most transfers are processed within 24 hours",
       "Track every transfer in real time",
     ],
     accent: "bg-navy-800",

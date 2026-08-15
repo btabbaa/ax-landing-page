@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent, type ReactNode } from "react";
 import Reveal from "@/components/ui/Reveal";
+import Link from "next/link";
 
 type TransferStatus = "submitted" | "processing" | "in_transit" | "delivered";
 
@@ -279,9 +280,9 @@ export default function TrackTransfer() {
                 <h3 className="font-heading font-bold text-navy-800 text-base mb-1">We couldn&rsquo;t find that transfer</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">
                   Double-check the reference number and try again, or{" "}
-                  <a href="mailto:support@atlanticxchange.com" className="text-teal-600 font-semibold hover:text-teal-700">
+                  <Link href="/contact" className="text-teal-600 font-semibold hover:text-teal-700">
                     contact our support team
-                  </a>{" "}
+                  </Link>{" "}
                   for help.
                 </p>
               </div>

@@ -4,6 +4,7 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import Footer         from "@/components/ui/Footer";
 import PageHero       from "@/components/ui/PageHero";
 import Reveal         from "@/components/ui/Reveal";
+import Link           from "next/link";
 
 export const metadata: Metadata = {
   title: "How It Works — Atlantic Xchange",
@@ -95,7 +96,7 @@ const steps = [
 const faqs = [
   {
     q: "How long does a transfer take?",
-    a: "Most transfers are completed within 24 hours. Some corridors (e.g., USA to Jordan, Egypt, Saudi Arabia) can be even faster — within a few hours during business days.",
+    a: "Most transfers are completed within 24 hours. Some corridors (e.g., USA to Jordan, Egypt, Bangladesh) can be even faster — within a few hours during business days.",
   },
   {
     q: "What are the fees?",
@@ -107,7 +108,7 @@ const faqs = [
   },
   {
     q: "What countries do you support?",
-    a: "We support transfers to 150+ countries including all major corridors: Middle East (Jordan, Egypt, Saudi Arabia, UAE, Iraq), Europe (via SEPA), Africa, and Latin America.",
+    a: "We support transfers to 150+ countries including all major corridors: Middle East (Jordan, Egypt, Syria, UAE, Iraq), Asia (Bangladesh, China, Pakistan, India), Europe (via SEPA), Africa, and Latin America.",
   },
   {
     q: "Is my money safe?",
@@ -238,12 +239,12 @@ export default function HowItWorksPage() {
               <div className="mt-10 bg-navy-800 rounded-2xl p-8 text-center text-white">
                 <p className="font-heading font-bold text-xl mb-2">Still have questions?</p>
                 <p className="text-white/55 text-sm mb-5">Our support team responds within 2 hours during business days.</p>
-                <a
-                  href="mailto:support@atlanticxchange.com"
+                <Link
+                  href="/contact"
                   className="inline-flex items-center gap-2 bg-ax-green-500 hover:bg-ax-green-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
                 >
                   Contact Support
-                </a>
+                </Link>
               </div>
             </Reveal>
           </div>

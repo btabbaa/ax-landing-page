@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link   from "next/link";
 import Reveal from "@/components/ui/Reveal";
+import { PHONE_DEARBORN, WHATSAPP_URL } from "@/lib/contact";
 
 /* ---------- Sending (USA) data ---------- */
 
@@ -102,7 +103,7 @@ const regions: { name: string; countries: Country[] }[] = [
     countries: [
       { flag: "🇯🇴", name: "Jordan",       currency: "JOD", time: "Same day",  method: "Cash Pickup & Bank Transfer" },
       { flag: "🇪🇬", name: "Egypt",        currency: "EGP", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇸🇦", name: "Saudi Arabia", currency: "SAR", time: "1–2 hours", method: "Bank Transfer" },
+      { flag: "🇸🇾", name: "Syria",        currency: "SYP", time: "24 hours",  method: "Cash Pickup" },
       { flag: "🇦🇪", name: "UAE",          currency: "AED", time: "Same day",  method: "Bank Transfer" },
       { flag: "🇮🇶", name: "Iraq",         currency: "IQD", time: "24 hours",  method: "Cash Pickup" },
     ],
@@ -120,6 +121,8 @@ const regions: { name: string; countries: Country[] }[] = [
     name: "Asia",
     countries: [
       { flag: "🇵🇰", name: "Pakistan",    currency: "PKR", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
+      { flag: "🇧🇩", name: "Bangladesh",  currency: "BDT", time: "1–2 hours", method: "Cash Pickup, Bank Transfer & Mobile Wallet" },
+      { flag: "🇨🇳", name: "China",       currency: "CNY", time: "Same day",  method: "Bank Transfer" },
       { flag: "🇵🇭", name: "Philippines", currency: "PHP", time: "24 hours",  method: "Cash Pickup & Bank Transfer" },
       { flag: "🇮🇳", name: "India",       currency: "INR", time: "1–2 hours", method: "Bank Transfer" },
     ],
@@ -302,9 +305,31 @@ export default function LocationsSection() {
                       </div>
 
                       <p className="text-gray-400 text-xs mt-4 leading-relaxed">
-                        Full addresses and hours for flagship branches are listed below. Partner
-                        agent details are available in-app once you select a nearby location.
+                        Full addresses and hours for flagship branches are listed below. For a nearby
+                        partner agent, call or WhatsApp us — we&apos;ll share the closest location.
                       </p>
+                      <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                        <a
+                          href={`tel:${PHONE_DEARBORN.tel}`}
+                          className="inline-flex items-center justify-center gap-2 bg-white border border-navy-100 hover:border-teal-300 text-navy-800 font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors"
+                        >
+                          Call {PHONE_DEARBORN.display}
+                        </a>
+                        <a
+                          href={WHATSAPP_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 bg-white border border-navy-100 hover:border-teal-300 text-navy-800 font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors"
+                        >
+                          WhatsApp
+                        </a>
+                        <Link
+                          href="/contact"
+                          className="inline-flex items-center justify-center gap-2 bg-white border border-navy-100 hover:border-teal-300 text-navy-800 font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors"
+                        >
+                          All contact details
+                        </Link>
+                      </div>
                     </div>
                   </Reveal>
                 )}
@@ -399,9 +424,9 @@ export default function LocationsSection() {
             <Reveal variant="fade-up" delay={200} duration={600}>
               <p className="text-center text-gray-400 text-sm mt-10">
                 Interested in becoming an agent in your state?{" "}
-                <a href="mailto:partners@atlanticxchange.com?subject=Agent%20Partnership%20Inquiry" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors">
-                  Apply to our Partner Program
-                </a>
+                <Link href="/contact" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors">
+                  Contact our partnerships team
+                </Link>
                 .
               </p>
             </Reveal>
@@ -493,9 +518,9 @@ export default function LocationsSection() {
             <Reveal variant="fade-up" delay={150} duration={600}>
               <p className="text-center text-gray-400 text-sm mt-10">
                 + 130 more countries and territories worldwide. Don&apos;t see your destination?{" "}
-                <a href="mailto:support@atlanticxchange.com" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors">
+                <Link href="/contact" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors">
                   Ask our support team
-                </a>
+                </Link>
                 .
               </p>
             </Reveal>

@@ -2,10 +2,11 @@
 
 import Link  from "next/link";
 import { useState } from "react";
+import { PHONE_DEARBORN, SUPPORT_EMAIL, WHATSAPP_URL } from "@/lib/contact";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-type FooterLink = { label: string; href: string };
+type FooterLink = { label: string; href: string; external?: boolean };
 
 const links: Record<string, FooterLink[]> = {
   Services: [
@@ -18,14 +19,17 @@ const links: Record<string, FooterLink[]> = {
     { label: "About Us",              href: "/about" },
     { label: "How It Works",          href: "/how-it-works" },
     { label: "Rates & Fees",          href: "/rates" },
+    { label: "Find a Location",       href: "/locations" },
+    { label: "Partner Program",       href: "/partners" },
     { label: "Compliance & Licenses", href: "/about#licenses" },
   ],
   Support: [
-    { label: "Contact Us",      href: "mailto:support@atlanticxchange.com" },
-    { label: "FAQ",             href: "/how-it-works#faq" },
-    { label: "Find a Location", href: "/locations" },
-    { label: "Track Transfer",  href: "/track" },
-    { label: "Partner Program", href: "/partners" },
+    { label: "Contact Us",  href: "/contact" },
+    { label: "Email",       href: `mailto:${SUPPORT_EMAIL}`, external: true },
+    { label: "WhatsApp",    href: WHATSAPP_URL, external: true },
+    { label: "Phone Call",  href: `tel:${PHONE_DEARBORN.tel}`, external: true },
+    { label: "FAQ",         href: "/how-it-works#faq" },
+    { label: "Track Transfer", href: "/track" },
   ],
   Legal: [
     { label: "Terms & Conditions",  href: "/legal/terms" },
@@ -76,14 +80,24 @@ function FooterLinkGroup({ category, items }: { category: string; items: FooterL
       {/* Links — collapsible on mobile */}
       <ul
         className={`space-y-2.5 overflow-hidden transition-all duration-300 sm:block ${
-          open ? "max-h-60 pb-4" : "max-h-0 sm:max-h-none"
+          open ? "max-h-80 pb-4" : "max-h-0 sm:max-h-none"
         }`}
       >
         {items.map((item) => (
           <li key={item.label}>
-            <Link href={item.href} className="text-white/45 text-sm hover:text-white transition-colors block py-0.5">
-              {item.label}
-            </Link>
+            {item.external ? (
+              <a
+                href={item.href}
+                {...(item.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="text-white/45 text-sm hover:text-white transition-colors block py-0.5"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link href={item.href} className="text-white/45 text-sm hover:text-white transition-colors block py-0.5">
+                {item.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

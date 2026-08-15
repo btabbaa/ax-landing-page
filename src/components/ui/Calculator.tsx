@@ -5,9 +5,11 @@ import { useState } from "react";
 const COUNTRIES = [
   { code: "JO", flag: "🇯🇴", name: "Jordan",       currency: "JOD", rate: 3.76   },
   { code: "EG", flag: "🇪🇬", name: "Egypt",        currency: "EGP", rate: 50.2   },
-  { code: "SA", flag: "🇸🇦", name: "Saudi Arabia", currency: "SAR", rate: 3.75   },
+  { code: "SY", flag: "🇸🇾", name: "Syria",        currency: "SYP", rate: 13000  },
   { code: "AE", flag: "🇦🇪", name: "UAE",          currency: "AED", rate: 3.67   },
   { code: "IQ", flag: "🇮🇶", name: "Iraq",         currency: "IQD", rate: 1310   },
+  { code: "BD", flag: "🇧🇩", name: "Bangladesh",   currency: "BDT", rate: 121.8  },
+  { code: "CN", flag: "🇨🇳", name: "China",        currency: "CNY", rate: 7.24   },
   { code: "MA", flag: "🇲🇦", name: "Morocco",      currency: "MAD", rate: 9.95   },
   { code: "TN", flag: "🇹🇳", name: "Tunisia",      currency: "TND", rate: 3.08   },
   { code: "PH", flag: "🇵🇭", name: "Philippines",  currency: "PHP", rate: 56.2   },

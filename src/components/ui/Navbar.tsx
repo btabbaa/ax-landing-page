@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import AppDownloadPrompt from "@/components/ui/AppDownloadPrompt";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -14,18 +15,34 @@ const navLinks = [
   { label: "Rates",          href: "/rates"       },
   { label: "Track Transfer", href: "/track"       },
   { label: "Locations",      href: "/locations"   },
+  { label: "Contact Us",     href: "/contact"     },
 ];
+
+const APP_PROMPT_KEY = "ax-app-prompt-dismissed";
+const isMobileViewport = () => window.matchMedia("(max-width: 1023px)").matches;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [appPrompt, setAppPrompt] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open || appPrompt ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [open]);
+  }, [open, appPrompt]);
+
+  useEffect(() => {
+    if (!isMobileViewport()) return;
+    if (sessionStorage.getItem(APP_PROMPT_KEY)) return;
+    setAppPrompt(true);
+  }, []);
 
   const close = () => setOpen(false);
+
+  const dismissAppPrompt = () => {
+    setAppPrompt(false);
+    sessionStorage.setItem(APP_PROMPT_KEY, "1");
+  };
 
   const handleSendClick = (e: React.MouseEvent) => {
     close();
@@ -33,6 +50,14 @@ export default function Navbar() {
     if (baselessPath === "/") {
       e.preventDefault();
       document.getElementById("send")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleSignIn = (e: React.MouseEvent) => {
+    close();
+    if (isMobileViewport()) {
+      e.preventDefault();
+      setAppPrompt(true);
     }
   };
 
@@ -52,7 +77,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navLinks.map((l) => (
               <Link
                 key={l.href}
@@ -68,6 +93,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               href="#login"
+              onClick={handleSignIn}
               className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors"
             >
               Sign In
@@ -134,7 +160,7 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex gap-3">
             <Link
               href="#login"
-              onClick={close}
+              onClick={handleSignIn}
               className="flex-1 text-center py-3.5 rounded-xl border border-white/15 text-white font-semibold text-sm hover:bg-white/[0.06] transition-colors"
             >
               Sign In
@@ -152,6 +178,8 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      <AppDownloadPrompt open={appPrompt} onClose={dismissAppPrompt} />
     </>
   );
 }
