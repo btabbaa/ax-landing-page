@@ -5,6 +5,8 @@ import Footer         from "@/components/ui/Footer";
 import PageHero       from "@/components/ui/PageHero";
 import Reveal         from "@/components/ui/Reveal";
 import Link           from "next/link";
+import SendOptionsSection from "@/components/sections/SendOptionsSection";
+import AppDownloadSection from "@/components/sections/AppDownloadSection";
 
 export const metadata: Metadata = {
   title: "How It Works — Atlantic Xchange",
@@ -140,9 +142,11 @@ export default function HowItWorksPage() {
           eyebrow="How It Works"
           title="Send Money in "
           highlight="6 Simple Steps"
-          subtitle="From creating your account to your recipient receiving funds — the whole process is designed to be fast, transparent, and stress-free."
+          subtitle="Send from the app, online, or at an Atlantic Xchange location — then follow a simple, transparent process until your recipient is paid."
           accentColor="green"
         />
+
+        <SendOptionsSection />
 
         {/* Steps */}
         <section className="py-20 bg-white">
@@ -205,6 +209,8 @@ export default function HowItWorksPage() {
             </Reveal>
           </div>
         </section>
+
+        <AppDownloadSection />
 
         {/* FAQ */}
         <section id="faq" className="py-20 bg-navy-50 scroll-mt-16">

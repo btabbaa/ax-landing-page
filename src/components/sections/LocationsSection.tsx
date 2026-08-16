@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link   from "next/link";
+import { useSearchParams } from "next/navigation";
 import Reveal from "@/components/ui/Reveal";
 import { PHONE_DEARBORN, WHATSAPP_URL } from "@/lib/contact";
+import Flag from "@/components/ui/Flag";
 
 /* ---------- Sending (USA) data ---------- */
 
@@ -95,66 +97,91 @@ const branches = [
 
 /* ---------- Receiving (worldwide) data ---------- */
 
-type Country = { flag: string; name: string; currency: string; time: string; method: string };
+type Country = { iso: string; name: string; currency: string; time: string; method: string };
 
 const regions: { name: string; countries: Country[] }[] = [
   {
     name: "Middle East",
     countries: [
-      { flag: "🇯🇴", name: "Jordan",       currency: "JOD", time: "Same day",  method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇪🇬", name: "Egypt",        currency: "EGP", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇸🇾", name: "Syria",        currency: "SYP", time: "24 hours",  method: "Cash Pickup" },
-      { flag: "🇦🇪", name: "UAE",          currency: "AED", time: "Same day",  method: "Bank Transfer" },
-      { flag: "🇮🇶", name: "Iraq",         currency: "IQD", time: "24 hours",  method: "Cash Pickup" },
+      { iso: "jo", name: "Jordan",       currency: "JOD", time: "Same day",  method: "Cash Pickup & Bank Transfer" },
+      { iso: "eg", name: "Egypt",        currency: "EGP", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
+      { iso: "sy", name: "Syria",        currency: "SYP", time: "24 hours",  method: "Cash Pickup" },
+      { iso: "ae", name: "UAE",          currency: "AED", time: "Same day",  method: "Bank Transfer" },
+      { iso: "iq", name: "Iraq",         currency: "IQD", time: "24 hours",  method: "Cash Pickup" },
     ],
   },
   {
     name: "Africa",
     countries: [
-      { flag: "🇲🇦", name: "Morocco", currency: "MAD", time: "24 hours", method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇹🇳", name: "Tunisia", currency: "TND", time: "24 hours", method: "Bank Transfer" },
-      { flag: "🇳🇬", name: "Nigeria", currency: "NGN", time: "24 hours", method: "Bank Transfer & Mobile Wallet" },
-      { flag: "🇬🇭", name: "Ghana",   currency: "GHS", time: "24 hours", method: "Mobile Wallet & Bank Transfer" },
+      { iso: "ma", name: "Morocco", currency: "MAD", time: "24 hours", method: "Cash Pickup & Bank Transfer" },
+      { iso: "tn", name: "Tunisia", currency: "TND", time: "24 hours", method: "Bank Transfer" },
+      { iso: "ng", name: "Nigeria", currency: "NGN", time: "24 hours", method: "Bank Transfer & Mobile Wallet" },
+      { iso: "gh", name: "Ghana",   currency: "GHS", time: "24 hours", method: "Mobile Wallet & Bank Transfer" },
     ],
   },
   {
     name: "Asia",
     countries: [
-      { flag: "🇵🇰", name: "Pakistan",    currency: "PKR", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇧🇩", name: "Bangladesh",  currency: "BDT", time: "1–2 hours", method: "Cash Pickup, Bank Transfer & Mobile Wallet" },
-      { flag: "🇨🇳", name: "China",       currency: "CNY", time: "Same day",  method: "Bank Transfer" },
-      { flag: "🇵🇭", name: "Philippines", currency: "PHP", time: "24 hours",  method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇮🇳", name: "India",       currency: "INR", time: "1–2 hours", method: "Bank Transfer" },
+      { iso: "pk", name: "Pakistan",    currency: "PKR", time: "1–2 hours", method: "Cash Pickup & Bank Transfer" },
+      { iso: "bd", name: "Bangladesh",  currency: "BDT", time: "1–2 hours", method: "Cash Pickup, Bank Transfer & Mobile Wallet" },
+      { iso: "cn", name: "China",       currency: "CNY", time: "Same day",  method: "Bank Transfer" },
+      { iso: "ph", name: "Philippines", currency: "PHP", time: "24 hours",  method: "Cash Pickup & Bank Transfer" },
+      { iso: "in", name: "India",       currency: "INR", time: "1–2 hours", method: "Bank Transfer" },
     ],
   },
   {
     name: "Europe",
     countries: [
-      { flag: "🇬🇧", name: "United Kingdom", currency: "GBP", time: "Same day", method: "Bank Transfer" },
-      { flag: "🇩🇪", name: "Germany",        currency: "EUR", time: "Same day", method: "SEPA Bank Transfer" },
-      { flag: "🇫🇷", name: "France",         currency: "EUR", time: "Same day", method: "SEPA Bank Transfer" },
+      { iso: "gb", name: "United Kingdom", currency: "GBP", time: "Same day", method: "Bank Transfer" },
+      { iso: "de", name: "Germany",        currency: "EUR", time: "Same day", method: "SEPA Bank Transfer" },
+      { iso: "fr", name: "France",         currency: "EUR", time: "Same day", method: "SEPA Bank Transfer" },
     ],
   },
   {
     name: "Americas",
     countries: [
-      { flag: "🇲🇽", name: "Mexico",   currency: "MXN", time: "Same day", method: "Cash Pickup & Bank Transfer" },
-      { flag: "🇨🇴", name: "Colombia", currency: "COP", time: "24 hours", method: "Bank Transfer" },
+      { iso: "mx", name: "Mexico",   currency: "MXN", time: "Same day", method: "Cash Pickup & Bank Transfer" },
+      { iso: "co", name: "Colombia", currency: "COP", time: "24 hours", method: "Bank Transfer" },
     ],
   },
 ];
 
 const regionTabs = ["All", ...regions.map((r) => r.name)];
 
+const REGION_ALIASES: Record<string, string> = {
+  europe: "Europe",
+  sepa: "Europe",
+  "middle-east": "Middle East",
+  "middle east": "Middle East",
+  mena: "Middle East",
+};
+
+function resolveRegion(param?: string) {
+  if (!param) return "All";
+  const key = param.trim().toLowerCase().replace(/[+_]/g, " ");
+  const exact = regionTabs.find((r) => r.toLowerCase() === key);
+  if (exact) return exact;
+  return REGION_ALIASES[key] ?? "All";
+}
+
 /* ---------- Component ---------- */
 
 type Tab = "send" | "receive";
 
 export default function LocationsSection() {
-  const [tab, setTab] = useState<Tab>("send");
+  const searchParams = useSearchParams();
+  const regionFromUrl = resolveRegion(searchParams.get("region") ?? undefined);
+  const [tab, setTab] = useState<Tab>(regionFromUrl !== "All" ? "receive" : "send");
   const [search, setSearch] = useState("");
-  const [activeRegion, setActiveRegion] = useState("All");
+  const [activeRegion, setActiveRegion] = useState(regionFromUrl);
   const [selectedState, setSelectedState] = useState<string | null>(null);
+
+  useEffect(() => {
+    const region = resolveRegion(searchParams.get("region") ?? undefined);
+    if (region === "All") return;
+    setTab("receive");
+    setActiveRegion(region);
+  }, [searchParams]);
 
   const visibleRegions = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -165,7 +192,7 @@ export default function LocationsSection() {
   }, [search, activeRegion]);
 
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section id="coverage" className="py-16 sm:py-20 bg-white scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
 
         {/* Tab switcher */}
@@ -188,6 +215,7 @@ export default function LocationsSection() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
+                <Flag code="us" name="United States" size="sm" />
                 Sending — USA
               </button>
               <button
@@ -356,7 +384,10 @@ export default function LocationsSection() {
                       </span>
                       <div>
                         <h4 className="font-heading font-bold text-navy-800 text-lg">{office.city}</h4>
-                        <p className="text-navy-400 text-xs font-medium">{office.state}, USA</p>
+                        <p className="text-navy-400 text-xs font-medium inline-flex items-center gap-1.5">
+                          <Flag code="us" name="United States" size="sm" />
+                          {office.state}, USA
+                        </p>
                       </div>
                     </div>
 
@@ -493,7 +524,7 @@ export default function LocationsSection() {
                           key={c.name}
                           className="flex items-center gap-3 bg-navy-50/60 border border-navy-100 rounded-xl p-4 hover:border-teal-300 transition-colors"
                         >
-                          <span className="text-2xl leading-none flex-shrink-0">{c.flag}</span>
+                          <Flag code={c.iso} name={c.name} size="lg" />
                           <div className="min-w-0 flex-1">
                             <p className="font-semibold text-navy-800 text-sm truncate">{c.name}</p>
                             <p className="text-gray-400 text-xs truncate">{c.method}</p>

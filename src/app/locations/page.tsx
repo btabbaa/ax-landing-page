@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Navbar         from "@/components/ui/Navbar";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Footer          from "@/components/ui/Footer";
@@ -24,7 +25,9 @@ export default function LocationsPage() {
           subtitle="Every transfer starts in the United States and can be picked up or deposited in 150+ countries across the globe."
           accentColor="teal"
         />
-        <LocationsSection />
+        <Suspense>
+          <LocationsSection />
+        </Suspense>
       </main>
       <Footer />
     </>

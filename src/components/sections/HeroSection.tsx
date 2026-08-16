@@ -76,14 +76,7 @@ export default function HeroSection() {
           {/* Left text column */}
           <div className="flex-1 pt-2 lg:pt-6 w-full">
 
-            <Reveal variant="fade-down" delay={0} duration={700}>
-              <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.12] rounded-full px-4 py-1.5 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-ax-green-400 animate-pulse" />
-                <span className="text-white/80 text-xs font-semibold tracking-wide">
-                  Trusted by 10,000+ Customers Worldwide
-                </span>
-              </div>
-            </Reveal>
+            
 
             <Reveal variant="fade-up" delay={100} duration={800}>
               <h1 className="font-heading font-extrabold text-white leading-[1.08] mb-5">

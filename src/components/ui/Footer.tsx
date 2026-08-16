@@ -3,6 +3,7 @@
 import Link  from "next/link";
 import { useState } from "react";
 import { PHONE_DEARBORN, SUPPORT_EMAIL, WHATSAPP_URL } from "@/lib/contact";
+import StoreBadges from "@/components/ui/StoreBadges";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -13,7 +14,7 @@ const links: Record<string, FooterLink[]> = {
     { label: "Person to Person",     href: "/services" },
     { label: "Business to Business", href: "/services" },
     { label: "SEPA Transfers",       href: "/services" },
-    { label: "Currency Exchange",    href: "/services" },
+    { label: "Currency Exchange",    href: "/currency-exchange" },
   ],
   Company: [
     { label: "About Us",              href: "/about" },
@@ -21,6 +22,7 @@ const links: Record<string, FooterLink[]> = {
     { label: "Rates & Fees",          href: "/rates" },
     { label: "Find a Location",       href: "/locations" },
     { label: "Partner Program",       href: "/partners" },
+    { label: "Download the App",      href: "/#download-app" },
     { label: "Compliance & Licenses", href: "/about#licenses" },
   ],
   Support: [
@@ -80,7 +82,7 @@ function FooterLinkGroup({ category, items }: { category: string; items: FooterL
       {/* Links — collapsible on mobile */}
       <ul
         className={`space-y-2.5 overflow-hidden transition-all duration-300 sm:block ${
-          open ? "max-h-80 pb-4" : "max-h-0 sm:max-h-none"
+          open ? "max-h-96 pb-4" : "max-h-0 sm:max-h-none"
         }`}
       >
         {items.map((item) => (
@@ -125,6 +127,7 @@ export default function Footer() {
               Empowering individuals and businesses to move money globally —
               fast, affordable, and reliable.
             </p>
+            <StoreBadges variant="outline" size="sm" className="mb-5 sm:mb-6" />
             <div className="space-y-1.5 text-sm text-white/45">
              
               <a href="mailto:info@atlanticxchange.com"

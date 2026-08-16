@@ -17,6 +17,8 @@ const services = [
     accent: "bg-navy-800",
     tagBg:  "bg-navy-50 text-navy-700",
     border: "hover:border-navy-300",
+    href:   "/services#p2p",
+    cta:    "Learn more",
   },
   {
     icon: (
@@ -31,6 +33,8 @@ const services = [
     accent: "bg-teal-600",
     tagBg:  "bg-teal-50 text-teal-700",
     border: "hover:border-teal-300",
+    href:   "/services#b2b",
+    cta:    "Learn more",
   },
   {
     icon: (
@@ -45,20 +49,24 @@ const services = [
     accent: "bg-ax-green-500",
     tagBg:  "bg-ax-green-50 text-ax-green-700",
     border: "hover:border-ax-green-200",
+    href:   "/locations?region=Europe#coverage",
+    cta:    "Find locations",
   },
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
         <path strokeLinecap="round" strokeLinejoin="round"
-          d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4" />
+          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
       </svg>
     ),
-    tag:    "FX",
-    title:  "Currency Exchange",
-    desc:   "Exchange currencies at competitive, transparent rates — no hidden fees, whether you're sending money or just converting.",
+    tag:    "MENA",
+    title:  "Middle East Transfers",
+    desc:   "Send to Jordan, Egypt, UAE, and across the region — cash pickup or bank transfer, often the same day.",
     accent: "bg-navy-600",
     tagBg:  "bg-navy-50 text-navy-600",
     border: "hover:border-navy-200",
+    href:   "/locations?region=Middle+East#coverage",
+    cta:    "Find locations",
   },
 ];
 
@@ -88,10 +96,10 @@ export default function ServicesSection() {
 
         {/* Cards — 1 col on mobile, 2 on sm/md, 4 on lg+ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {services.map((svc, i) => (
-            <Reveal key={i} variant="fade-up" delay={i * 120} duration={700}>
+          {services.map((svc, i) => {
+            const card = (
               <div
-                className={`group bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 ${svc.border} transition-all duration-200 cursor-pointer h-full`}
+                className={`group bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 ${svc.border} transition-all duration-200 h-full cursor-pointer`}
               >
                 <div className="flex items-start justify-between mb-5 sm:mb-7">
                   <div className={`${svc.accent} text-white w-12 h-12 rounded-xl flex items-center justify-center`}>
@@ -104,14 +112,20 @@ export default function ServicesSection() {
                 <h3 className="font-heading font-bold text-navy-800 text-lg sm:text-xl mb-2 sm:mb-3">{svc.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed mb-5 sm:mb-7">{svc.desc}</p>
                 <div className="flex items-center gap-1.5 text-teal-600 text-sm font-semibold group-hover:gap-3 transition-all">
-                  <span>Learn more</span>
+                  <span>{svc.cta}</span>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
               </div>
-            </Reveal>
-          ))}
+            );
+
+            return (
+              <Reveal key={i} variant="fade-up" delay={i * 120} duration={700}>
+                <Link href={svc.href} className="block h-full">{card}</Link>
+              </Reveal>
+            );
+          })}
         </div>
 
         {/* CTA */}
