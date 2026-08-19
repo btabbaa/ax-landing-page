@@ -3,6 +3,7 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import Reveal from "@/components/ui/Reveal";
 import Link from "next/link";
+import Flag from "@/components/ui/Flag";
 
 type TransferStatus = "submitted" | "processing" | "in_transit" | "delivered";
 
@@ -11,6 +12,7 @@ interface TransferRecord {
   status: TransferStatus;
   recipientName: string;
   destination: string;
+  iso: string;
   amountSent: number;
   amountReceived: number;
   currencyReceived: string;
@@ -29,6 +31,7 @@ const DEMO_TRANSFERS: Record<string, TransferRecord> = {
     status: "delivered",
     recipientName: "Layla Hammoud",
     destination: "Amman, Jordan",
+    iso: "jo",
     amountSent: 350,
     amountReceived: 2461.15,
     currencyReceived: "JOD",
@@ -41,6 +44,7 @@ const DEMO_TRANSFERS: Record<string, TransferRecord> = {
     status: "in_transit",
     recipientName: "Omar Khalil",
     destination: "Cairo, Egypt",
+    iso: "eg",
     amountSent: 500,
     amountReceived: 15296.5,
     currencyReceived: "EGP",
@@ -52,6 +56,7 @@ const DEMO_TRANSFERS: Record<string, TransferRecord> = {
     status: "processing",
     recipientName: "Sara Idris",
     destination: "Dubai, UAE",
+    iso: "ae",
     amountSent: 200,
     amountReceived: 723.94,
     currencyReceived: "AED",
@@ -313,7 +318,10 @@ export default function TrackTransfer() {
                 <div>
                   <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Recipient</p>
                   <p className="text-navy-800 font-bold text-sm">{result.recipientName}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{result.destination}</p>
+                  <p className="text-gray-500 text-xs mt-0.5 inline-flex items-center gap-1.5">
+                    <Flag code={result.iso} name={result.destination} size="sm" />
+                    {result.destination}
+                  </p>
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Amount Sent</p>

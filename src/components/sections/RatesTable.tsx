@@ -2,26 +2,27 @@
 
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
+import Flag from "@/components/ui/Flag";
 
 const countries = [
-  { flag: "🇯🇴", name: "Jordan",       code: "JOD", rate: 0.7095, trend: "+0.2%",  minFee: 2.99, time: "Same day",   popular: true  },
-  { flag: "🇪🇬", name: "Egypt",        code: "EGP", rate: 30.85,  trend: "+1.1%",  minFee: 2.99, time: "1–2 hours", popular: true  },
-  { flag: "🇸🇾", name: "Syria",        code: "SYP", rate: 13000,  trend: "+0.4%",  minFee: 2.99, time: "24 hours",  popular: true  },
-  { flag: "🇦🇪", name: "UAE",          code: "AED", rate: 3.6724, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
-  { flag: "🇮🇶", name: "Iraq",         code: "IQD", rate: 1308,   trend: "0.0%",   minFee: 2.99, time: "24 hours", popular: true  },
-  { flag: "🇧🇩", name: "Bangladesh",   code: "BDT", rate: 121.80, trend: "+0.3%",  minFee: 2.99, time: "1–2 hours", popular: true  },
-  { flag: "🇨🇳", name: "China",        code: "CNY", rate: 7.2450, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
-  { flag: "🇲🇦", name: "Morocco",      code: "MAD", rate: 10.08,  trend: "+0.3%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇹🇳", name: "Tunisia",      code: "TND", rate: 3.1105, trend: "+0.4%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇵🇰", name: "Pakistan",     code: "PKR", rate: 277.5,  trend: "+1.8%",  minFee: 2.99, time: "1–2 hours", popular: false },
-  { flag: "🇵🇭", name: "Philippines",  code: "PHP", rate: 57.12,  trend: "+0.5%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇳🇬", name: "Nigeria",      code: "NGN", rate: 1620,   trend: "+2.3%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇬🇭", name: "Ghana",        code: "GHS", rate: 14.72,  trend: "+1.0%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇲🇽", name: "Mexico",       code: "MXN", rate: 18.32,  trend: "-0.2%",  minFee: 2.99, time: "Same day", popular: false },
-  { flag: "🇨🇴", name: "Colombia",     code: "COP", rate: 4120,   trend: "+0.6%",  minFee: 2.99, time: "24 hours", popular: false },
-  { flag: "🇬🇧", name: "UK",           code: "GBP", rate: 0.7910, trend: "-0.1%",  minFee: 2.99, time: "Same day", popular: false },
-  { flag: "🇪🇺", name: "Europe",       code: "EUR", rate: 0.9250, trend: "+0.2%",  minFee: 2.99, time: "Same day", popular: false },
-  { flag: "🇮🇳", name: "India",        code: "INR", rate: 83.42,  trend: "+0.3%",  minFee: 2.99, time: "1–2 hours", popular: false },
+  { iso: "jo", name: "Jordan",       code: "JOD", rate: 0.7095, trend: "+0.2%",  minFee: 2.99, time: "Same day",   popular: true  },
+  { iso: "eg", name: "Egypt",        code: "EGP", rate: 30.85,  trend: "+1.1%",  minFee: 2.99, time: "1–2 hours", popular: true  },
+  { iso: "sy", name: "Syria",        code: "SYP", rate: 13000,  trend: "+0.4%",  minFee: 2.99, time: "24 hours",  popular: true  },
+  { iso: "ae", name: "UAE",          code: "AED", rate: 3.6724, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
+  { iso: "iq", name: "Iraq",         code: "IQD", rate: 1308,   trend: "0.0%",   minFee: 2.99, time: "24 hours", popular: true  },
+  { iso: "bd", name: "Bangladesh",   code: "BDT", rate: 121.80, trend: "+0.3%",  minFee: 2.99, time: "1–2 hours", popular: true  },
+  { iso: "cn", name: "China",        code: "CNY", rate: 7.2450, trend: "+0.1%",  minFee: 2.99, time: "Same day",  popular: true  },
+  { iso: "ma", name: "Morocco",      code: "MAD", rate: 10.08,  trend: "+0.3%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "tn", name: "Tunisia",      code: "TND", rate: 3.1105, trend: "+0.4%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "pk", name: "Pakistan",     code: "PKR", rate: 277.5,  trend: "+1.8%",  minFee: 2.99, time: "1–2 hours", popular: false },
+  { iso: "ph", name: "Philippines",  code: "PHP", rate: 57.12,  trend: "+0.5%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "ng", name: "Nigeria",      code: "NGN", rate: 1620,   trend: "+2.3%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "gh", name: "Ghana",        code: "GHS", rate: 14.72,  trend: "+1.0%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "mx", name: "Mexico",       code: "MXN", rate: 18.32,  trend: "-0.2%",  minFee: 2.99, time: "Same day", popular: false },
+  { iso: "co", name: "Colombia",     code: "COP", rate: 4120,   trend: "+0.6%",  minFee: 2.99, time: "24 hours", popular: false },
+  { iso: "gb", name: "UK",           code: "GBP", rate: 0.7910, trend: "-0.1%",  minFee: 2.99, time: "Same day", popular: false },
+  { iso: "eu", name: "Europe",       code: "EUR", rate: 0.9250, trend: "+0.2%",  minFee: 2.99, time: "Same day", popular: false },
+  { iso: "in", name: "India",        code: "INR", rate: 83.42,  trend: "+0.3%",  minFee: 2.99, time: "1–2 hours", popular: false },
 ];
 
 function formatRate(code: string, rate: number) {
@@ -134,7 +135,7 @@ export default function RatesTable() {
                       >
                         <td className={`px-4 sm:px-5 py-3.5 font-medium text-navy-800 sticky left-0 ${i % 2 === 0 ? "bg-white" : "bg-navy-50/30"}`}>
                           <span className="flex items-center gap-2.5">
-                            <span className="text-xl leading-none">{c.flag}</span>
+                            <Flag code={c.iso} name={c.name} />
                             <span className="whitespace-nowrap">
                               {c.name}
                               {c.popular && (

@@ -5,6 +5,8 @@ import Footer         from "@/components/ui/Footer";
 import PageHero       from "@/components/ui/PageHero";
 import Reveal         from "@/components/ui/Reveal";
 import Link           from "next/link";
+import SendOptionsSection from "@/components/sections/SendOptionsSection";
+import AppDownloadSection from "@/components/sections/AppDownloadSection";
 
 export const metadata: Metadata = {
   title: "How It Works — Atlantic Xchange",
@@ -84,6 +86,8 @@ export default function HowItWorksPage() {
           accentColor="green"
         />
 
+        <SendOptionsSection />
+
         {/* Steps */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
@@ -130,6 +134,8 @@ export default function HowItWorksPage() {
             </Reveal>
           </div>
         </section>
+
+        <AppDownloadSection />
 
         {/* FAQ */}
         <section id="faq" className="py-20 bg-navy-50 scroll-mt-16">

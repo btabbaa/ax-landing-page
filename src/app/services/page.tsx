@@ -9,7 +9,7 @@ import Link           from "next/link";
 export const metadata: Metadata = {
   title: "Our Services — Atlantic Xchange",
   description:
-    "Explore all Atlantic Xchange money transfer services: Person to Person, Business to Business, SEPA European Transfers, and Currency Exchange.",
+    "Explore all Atlantic Xchange money transfer services: Person to Person, Business to Business, European Transfers, and Middle East Transfers.",
 };
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -22,6 +22,7 @@ const services = [
           d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
+    id:     "p2p",
     tag:    "P2P",
     title:  "Person to Person",
     desc:   "Send to friends and family worldwide. Cash pickup or direct bank transfer — always at the best exchange rate.",
@@ -43,6 +44,7 @@ const services = [
           d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     ),
+    id:     "b2b",
     tag:    "B2B",
     title:  "Business to Business",
     desc:   "Transfer funds to vendors, suppliers, and partners internationally — compliant, fast, and at competitive rates.",
@@ -64,8 +66,11 @@ const services = [
           d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
+    id:     "europe",
     tag:    "SEPA",
     title:  "European Transfers",
+    href:   "/locations?region=Europe#coverage",
+    cta:    "Find European locations",
     desc:   "Send directly to any European bank account with full SEPA compliance. 36 countries — no intermediary banks.",
     details: [
       "Direct to any IBAN in 36 SEPA countries",
@@ -82,18 +87,21 @@ const services = [
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
         <path strokeLinecap="round" strokeLinejoin="round"
-          d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4" />
+          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
       </svg>
     ),
-    tag:    "FX",
-    title:  "Currency Exchange",
-    desc:   "Exchange currencies at competitive, transparent rates — no hidden fees, whether you're sending money or just converting.",
+    id:     "middle-east",
+    tag:    "MENA",
+    title:  "Middle East Transfers",
+    href:   "/locations?region=Middle+East#coverage",
+    cta:    "Find Middle East locations",
+    desc:   "Send to Jordan, Egypt, UAE, and across the region — cash pickup or bank transfer, often the same day.",
     details: [
-      "Live mid-market rates with minimal spread",
-      "Convert 30+ major currencies",
-      "No hidden fees or surprise charges",
-      "Exchange in-branch or online",
-      "Rate alerts available on request",
+      "Jordan, Egypt, UAE, Syria, Iraq, and more",
+      "Cash pickup or direct bank deposit",
+      "Same-day delivery on key corridors",
+      "Local-currency payout at competitive rates",
+      "Track every transfer until it arrives",
     ],
     accent: "bg-navy-600",
     tagBg:  "bg-navy-50 text-navy-600",
@@ -128,7 +136,7 @@ export default function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               {services.map((svc, i) => (
                 <Reveal key={i} variant="fade-up" delay={i * 100} duration={700}>
-                  <div className={`group bg-white rounded-2xl border ${svc.border} p-7 sm:p-9 transition-all duration-200 h-full flex flex-col`}>
+                  <div id={svc.id} className={`group scroll-mt-24 bg-white rounded-2xl border ${svc.border} p-7 sm:p-9 transition-all duration-200 h-full flex flex-col`}>
                     <div className="flex items-start justify-between mb-6">
                       <div className={`${svc.accent} text-white w-14 h-14 rounded-xl flex items-center justify-center`}>
                         {svc.icon}
@@ -151,6 +159,17 @@ export default function ServicesPage() {
                         </li>
                       ))}
                     </ul>
+                    {"href" in svc && svc.href && (
+                      <Link
+                        href={svc.href}
+                        className="inline-flex items-center gap-1.5 mt-6 text-teal-600 text-sm font-semibold hover:text-teal-700 transition-colors"
+                      >
+                        {svc.cta ?? "Learn more"}
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </Link>
+                    )}
                   </div>
                 </Reveal>
               ))}

@@ -1,24 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import CountrySelect from "@/components/ui/CountrySelect";
+import Flag from "@/components/ui/Flag";
 
 const COUNTRIES = [
-  { code: "JO", flag: "🇯🇴", name: "Jordan",       currency: "JOD", rate: 3.76   },
-  { code: "EG", flag: "🇪🇬", name: "Egypt",        currency: "EGP", rate: 50.2   },
-  { code: "SY", flag: "🇸🇾", name: "Syria",        currency: "SYP", rate: 13000  },
-  { code: "AE", flag: "🇦🇪", name: "UAE",          currency: "AED", rate: 3.67   },
-  { code: "IQ", flag: "🇮🇶", name: "Iraq",         currency: "IQD", rate: 1310   },
-  { code: "BD", flag: "🇧🇩", name: "Bangladesh",   currency: "BDT", rate: 121.8  },
-  { code: "CN", flag: "🇨🇳", name: "China",        currency: "CNY", rate: 7.24   },
-  { code: "MA", flag: "🇲🇦", name: "Morocco",      currency: "MAD", rate: 9.95   },
-  { code: "TN", flag: "🇹🇳", name: "Tunisia",      currency: "TND", rate: 3.08   },
-  { code: "PH", flag: "🇵🇭", name: "Philippines",  currency: "PHP", rate: 56.2   },
-  { code: "MX", flag: "🇲🇽", name: "Mexico",       currency: "MXN", rate: 17.4   },
-  { code: "IN", flag: "🇮🇳", name: "India",        currency: "INR", rate: 83.5   },
-  { code: "NG", flag: "🇳🇬", name: "Nigeria",      currency: "NGN", rate: 1620   },
-  { code: "GH", flag: "🇬🇭", name: "Ghana",        currency: "GHS", rate: 15.8   },
-  { code: "GB", flag: "🇬🇧", name: "UK (SEPA)",    currency: "GBP", rate: 0.793  },
-  { code: "DE", flag: "🇩🇪", name: "Germany",      currency: "EUR", rate: 0.921  },
+  { code: "JO", name: "Jordan",       currency: "JOD", rate: 3.76   },
+  { code: "EG", name: "Egypt",        currency: "EGP", rate: 50.2   },
+  { code: "SY", name: "Syria",        currency: "SYP", rate: 13000  },
+  { code: "AE", name: "UAE",          currency: "AED", rate: 3.67   },
+  { code: "IQ", name: "Iraq",         currency: "IQD", rate: 1310   },
+  { code: "BD", name: "Bangladesh",   currency: "BDT", rate: 121.8  },
+  { code: "CN", name: "China",        currency: "CNY", rate: 7.24   },
+  { code: "MA", name: "Morocco",      currency: "MAD", rate: 9.95   },
+  { code: "TN", name: "Tunisia",      currency: "TND", rate: 3.08   },
+  { code: "PH", name: "Philippines",  currency: "PHP", rate: 56.2   },
+  { code: "MX", name: "Mexico",       currency: "MXN", rate: 17.4   },
+  { code: "IN", name: "India",        currency: "INR", rate: 83.5   },
+  { code: "NG", name: "Nigeria",      currency: "NGN", rate: 1620   },
+  { code: "GH", name: "Ghana",        currency: "GHS", rate: 15.8   },
+  { code: "GB", name: "UK (SEPA)",    currency: "GBP", rate: 0.793  },
+  { code: "DE", name: "Germany",      currency: "EUR", rate: 0.921  },
 ];
 
 const FEE = 2.99;
@@ -82,25 +84,15 @@ export default function Calculator() {
         <label className="block text-[11px] font-bold text-navy-400 uppercase tracking-[0.12em] mb-1.5">
           Send To
         </label>
-        <div className="relative">
-          <select
-            value={idx}
-            onChange={(e) => setIdx(Number(e.target.value))}
-            className="w-full appearance-none border border-gray-200 rounded-xl px-4 py-3.5 text-sm font-medium text-gray-800 bg-gray-50 outline-none focus:border-teal-600 transition-colors cursor-pointer pr-10"
-          >
-            {COUNTRIES.map((c, i) => (
-              <option key={c.code} value={i}>
-                {c.flag}  {c.name} ({c.currency})
-              </option>
-            ))}
-          </select>
-          <svg
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
+        <CountrySelect
+          value={idx}
+          onChange={setIdx}
+          options={COUNTRIES.map((c) => ({
+            iso: c.code,
+            name: c.name,
+            suffix: c.currency,
+          }))}
+        />
       </div>
 
       {/* Recipient gets */}
@@ -112,7 +104,8 @@ export default function Calculator() {
           <span className="flex-1 text-xl font-extrabold text-ax-green-700 min-w-0 truncate">
             {fmt(received)}
           </span>
-          <span className="text-[11px] font-bold bg-ax-green-100 text-ax-green-800 px-2.5 py-1 rounded-lg flex-shrink-0">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold bg-ax-green-100 text-ax-green-800 px-2.5 py-1 rounded-lg flex-shrink-0">
+            <Flag code={country.code} name={country.name} size="sm" />
             {country.currency}
           </span>
         </div>

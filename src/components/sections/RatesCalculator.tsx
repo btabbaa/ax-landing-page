@@ -2,22 +2,24 @@
 
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
+import CountrySelect from "@/components/ui/CountrySelect";
+import Flag from "@/components/ui/Flag";
 
 const countries = [
-  { flag: "🇯🇴", name: "Jordan",       code: "JOD", rate: 0.7095 },
-  { flag: "🇪🇬", name: "Egypt",        code: "EGP", rate: 30.85  },
-  { flag: "🇸🇾", name: "Syria",        code: "SYP", rate: 13000  },
-  { flag: "🇦🇪", name: "UAE",          code: "AED", rate: 3.6724 },
-  { flag: "🇮🇶", name: "Iraq",         code: "IQD", rate: 1308   },
-  { flag: "🇧🇩", name: "Bangladesh",   code: "BDT", rate: 121.80 },
-  { flag: "🇨🇳", name: "China",        code: "CNY", rate: 7.2450 },
-  { flag: "🇲🇦", name: "Morocco",      code: "MAD", rate: 10.08  },
-  { flag: "🇵🇰", name: "Pakistan",     code: "PKR", rate: 277.5  },
-  { flag: "🇳🇬", name: "Nigeria",      code: "NGN", rate: 1620   },
-  { flag: "🇲🇽", name: "Mexico",       code: "MXN", rate: 18.32  },
-  { flag: "🇬🇧", name: "UK",           code: "GBP", rate: 0.7910 },
-  { flag: "🇪🇺", name: "Europe",       code: "EUR", rate: 0.9250 },
-  { flag: "🇮🇳", name: "India",        code: "INR", rate: 83.42  },
+  { iso: "jo", name: "Jordan",       code: "JOD", rate: 0.7095 },
+  { iso: "eg", name: "Egypt",        code: "EGP", rate: 30.85  },
+  { iso: "sy", name: "Syria",        code: "SYP", rate: 13000  },
+  { iso: "ae", name: "UAE",          code: "AED", rate: 3.6724 },
+  { iso: "iq", name: "Iraq",         code: "IQD", rate: 1308   },
+  { iso: "bd", name: "Bangladesh",   code: "BDT", rate: 121.80 },
+  { iso: "cn", name: "China",        code: "CNY", rate: 7.2450 },
+  { iso: "ma", name: "Morocco",      code: "MAD", rate: 10.08  },
+  { iso: "pk", name: "Pakistan",     code: "PKR", rate: 277.5  },
+  { iso: "ng", name: "Nigeria",      code: "NGN", rate: 1620   },
+  { iso: "mx", name: "Mexico",       code: "MXN", rate: 18.32  },
+  { iso: "gb", name: "UK",           code: "GBP", rate: 0.7910 },
+  { iso: "eu", name: "Europe",       code: "EUR", rate: 0.9250 },
+  { iso: "in", name: "India",        code: "INR", rate: 83.42  },
 ];
 
 function formatReceived(code: string, amount: number) {
@@ -76,22 +78,16 @@ export default function RatesCalculator() {
                 {/* Country select */}
                 <div>
                   <label className="text-white/60 text-sm font-medium mb-2 block">Destination country</label>
-                  <div className="relative">
-                    <select
-                      value={selectedIdx}
-                      onChange={(e) => setSelectedIdx(Number(e.target.value))}
-                      className="w-full appearance-none bg-white/10 border border-white/10 text-white font-medium rounded-xl px-4 py-3.5 outline-none focus:border-teal-500/60 transition-colors cursor-pointer"
-                    >
-                      {countries.map((c, i) => (
-                        <option key={c.code} value={i} className="bg-navy-800 text-white">
-                          {c.flag}  {c.name} ({c.code})
-                        </option>
-                      ))}
-                    </select>
-                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <CountrySelect
+                    variant="dark"
+                    value={selectedIdx}
+                    onChange={setSelectedIdx}
+                    options={countries.map((c) => ({
+                      iso: c.iso,
+                      name: c.name,
+                      suffix: c.code,
+                    }))}
+                  />
                 </div>
               </div>
 
@@ -102,7 +98,8 @@ export default function RatesCalculator() {
 
                 <div className="relative">
                   <p className="text-white/60 text-sm mb-1">Your recipient gets</p>
-                  <p className="font-heading font-extrabold text-4xl lg:text-5xl mb-4 leading-none">
+                  <p className="font-heading font-extrabold text-4xl lg:text-5xl mb-4 leading-none flex items-center gap-3">
+                    <Flag code={country.iso} name={country.name} size="lg" />
                     {received > 0 ? formatReceived(country.code, received) : "—"}
                   </p>
 
