@@ -5,14 +5,13 @@ import Footer         from "@/components/ui/Footer";
 import PageHero       from "@/components/ui/PageHero";
 import Reveal         from "@/components/ui/Reveal";
 import Link           from "next/link";
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
 
 export const metadata: Metadata = {
   title: "Our Services — Atlantic Xchange",
   description:
     "Explore all Atlantic Xchange money transfer services: Person to Person, Business to Business, European Transfers, and Middle East Transfers.",
 };
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const services = [
   {
@@ -109,13 +108,6 @@ const services = [
   },
 ];
 
-const steps = [
-  { n: "01", title: "Create an account",   desc: "Sign up in minutes — all online, no branch visit required." },
-  { n: "02", title: "Enter transfer details", desc: "Choose your destination, amount, and delivery method." },
-  { n: "03", title: "Pay securely",         desc: "Bank transfer, debit card, or cash at one of our locations." },
-  { n: "04", title: "Money delivered",      desc: "Your recipient gets the money — tracked every step of the way." },
-];
-
 export default function ServicesPage() {
   return (
     <>
@@ -177,41 +169,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* How it works strip */}
-        <section className="py-16 sm:py-20 bg-navy-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-            <Reveal variant="fade-up" duration={700}>
-              <div className="text-center mb-10 sm:mb-14">
-                <p className="text-teal-600 text-xs font-bold uppercase tracking-[0.15em] mb-3">Simple Process</p>
-                <h2 className="font-heading font-extrabold text-navy-800 text-3xl sm:text-4xl">How It Works</h2>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {steps.map((s, i) => (
-                <Reveal key={s.n} variant="fade-up" delay={i * 100} duration={650}>
-                  <div className="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-100">
-                    <span className="text-5xl font-heading font-extrabold text-navy-100 leading-none block mb-3">{s.n}</span>
-                    <h3 className="font-heading font-bold text-navy-800 text-base mb-2">{s.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal variant="fade-up" delay={200} duration={700}>
-              <div className="mt-10 text-center">
-                <Link
-                  href="/how-it-works"
-                  className="inline-flex items-center gap-2 text-teal-600 font-semibold text-sm hover:text-teal-700 transition-colors"
-                >
-                  Read the full guide
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <HowItWorksSection />
 
         {/* CTA banner */}
         <section className="py-16 sm:py-20 bg-navy-800">
