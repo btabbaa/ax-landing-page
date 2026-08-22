@@ -11,14 +11,14 @@ type FooterLink = { label: string; href: string; external?: boolean };
 
 const links: Record<string, FooterLink[]> = {
   Services: [
-    { label: "Person to Person",     href: "/services" },
-    { label: "Business to Business", href: "/services" },
-    { label: "SEPA Transfers",       href: "/services" },
+    { label: "Money Transfer",       href: "/money-transfer" },
+    { label: "Person to Person",     href: "/money-transfer#p2p" },
+    { label: "Business to Business", href: "/money-transfer#b2b" },
     { label: "Currency Exchange",    href: "/currency-exchange" },
   ],
   Company: [
     { label: "About Us",              href: "/about" },
-    { label: "How It Works",          href: "/how-it-works" },
+    { label: "FAQ",                   href: "/faq" },
     { label: "Rates & Fees",          href: "/rates" },
     { label: "Find a Location",       href: "/locations" },
     { label: "Partner Program",       href: "/partners" },
@@ -26,11 +26,11 @@ const links: Record<string, FooterLink[]> = {
     { label: "Compliance & Licenses", href: "/about#licenses" },
   ],
   Support: [
-    { label: "Contact Us",  href: "/contact" },
-    { label: "Email",       href: `mailto:${SUPPORT_EMAIL}`, external: true },
-    { label: "WhatsApp 24/7", href: WHATSAPP_URL, external: true },
-    { label: "Phone Call",  href: `tel:${PHONE_DEARBORN.tel}`, external: true },
-    { label: "FAQ",         href: "/how-it-works#faq" },
+    { label: "Contact Us",     href: "/contact" },
+    { label: "Email",          href: `mailto:${SUPPORT_EMAIL}`, external: true },
+    { label: "WhatsApp 24/7",  href: WHATSAPP_URL, external: true },
+    { label: "Phone Call",     href: `tel:${PHONE_DEARBORN.tel}`, external: true },
+    { label: "FAQ",            href: "/faq" },
     { label: "Track Transfer", href: "/track" },
   ],
   Legal: [

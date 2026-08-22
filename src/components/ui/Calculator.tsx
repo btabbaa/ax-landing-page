@@ -5,7 +5,7 @@ import CountrySelect from "@/components/ui/CountrySelect";
 import Flag from "@/components/ui/Flag";
 
 const COUNTRIES = [
-  { code: "JO", name: "Jordan",       currency: "JOD", rate: 3.76   },
+  { code: "JO", name: "Jordan",       currency: "JOD", rate: 0.709  },
   { code: "EG", name: "Egypt",        currency: "EGP", rate: 50.2   },
   { code: "SY", name: "Syria",        currency: "SYP", rate: 13000  },
   { code: "AE", name: "UAE",          currency: "AED", rate: 3.67   },
@@ -43,7 +43,7 @@ export default function Calculator() {
     <div className="bg-white rounded-2xl border border-navy-100 p-5 sm:p-6 w-full sm:max-w-sm shadow-xl shadow-navy-900/20">
 
       <p className="font-heading font-bold text-navy-800 text-lg mb-4 sm:mb-5">
-        Quick Transfer
+        Money Transfer
       </p>
 
       {/* You send */}

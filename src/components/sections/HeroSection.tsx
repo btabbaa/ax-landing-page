@@ -1,4 +1,4 @@
-import Calculator from "@/components/ui/Calculator";
+import TransferWidget from "@/components/ui/TransferWidget";
 import Reveal from "@/components/ui/Reveal";
 
 const trustBadges = [
@@ -9,8 +9,8 @@ const trustBadges = [
           d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    label: "FinCEN Licensed",
-    sub: "US Money Transmitter",
+    label: "Federally Licensed",
+    sub: "Regulated US money transmitter",
   },
   {
     icon: (
@@ -19,8 +19,8 @@ const trustBadges = [
           d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
       </svg>
     ),
-    label: "256-bit SSL",
-    sub: "Bank-Grade Security",
+    label: "Secure & Encrypted",
+    sub: "All transfers protected",
   },
   {
     icon: (
@@ -121,7 +121,7 @@ export default function HeroSection() {
 
             <Reveal variant="fade-in" delay={460} duration={600}>
               <a
-                href="/how-it-works"
+                href="/money-transfer"
                 className="inline-flex items-center gap-2 text-white/50 text-sm hover:text-white/90 transition-colors group"
               >
                 <span>See how it works</span>
@@ -142,7 +142,7 @@ export default function HeroSection() {
             duration={800}
             className="w-full lg:w-auto lg:flex-shrink-0 lg:self-start lg:sticky lg:top-24"
           >
-            <Calculator />
+            <TransferWidget />
           </Reveal>
 
         </div>

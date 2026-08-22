@@ -8,25 +8,27 @@ import AppDownloadPrompt from "@/components/ui/AppDownloadPrompt";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const primaryLinks = [
-  { label: "Services",     href: "/services" },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Exchange",     href: "/currency-exchange" },
-  { label: "Locations",    href: "/locations" },
-  { label: "Track",        href: "/track" },
+  { label: "Services",         href: "/services" },
+  { label: "Money Transfer",   href: "/money-transfer" },
+  { label: "Exchange",         href: "/currency-exchange" },
+  { label: "Locations",        href: "/locations" },
+  { label: "Track",            href: "/track" },
 ];
 
 const companyLinks = [
   { label: "About",    href: "/about" },
+  { label: "FAQ",      href: "/faq" },
   { label: "Partners", href: "/partners" },
   { label: "Contact",  href: "/contact" },
 ];
 
 const mobileLinks = [
   { label: "Services",          href: "/services" },
-  { label: "How It Works",      href: "/how-it-works" },
+  { label: "Money Transfer",    href: "/money-transfer" },
   { label: "Currency Exchange", href: "/currency-exchange" },
   { label: "Locations",         href: "/locations" },
   { label: "Track Transfer",    href: "/track" },
+  { label: "FAQ",               href: "/faq" },
   { label: "About",             href: "/about" },
   { label: "Partners",          href: "/partners" },
   { label: "Contact Us",        href: "/contact" },
@@ -82,7 +84,7 @@ export default function Navbar() {
   const handleDownloadClick = (e: React.MouseEvent) => {
     close();
     const baselessPath = pathname.replace(basePath, "") || "/";
-    if (baselessPath === "/" || baselessPath === "/how-it-works") {
+    if (baselessPath === "/" || baselessPath === "/money-transfer") {
       e.preventDefault();
       document.getElementById("download-app")?.scrollIntoView({ behavior: "smooth" });
     }

@@ -19,8 +19,8 @@ const values = [
           d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    title: "Trust & Compliance",
-    desc:  "Fully licensed by FinCEN and registered with NMLS. Every transaction is handled with strict regulatory compliance.",
+    title: "Licensed & Regulated",
+    desc:  "Federally licensed by the US Treasury and registered in multiple states. Your money is handled by a fully compliant, government-approved business.",
     color: "bg-navy-800",
   },
   {
@@ -59,10 +59,10 @@ const values = [
 ];
 
 const licenses = [
-  { name: "FinCEN",       full: "Financial Crimes Enforcement Network",    number: "Registered MSB",     color: "border-navy-300 bg-navy-50" },
-  { name: "NMLS",        full: "Nationwide Multistate Licensing System",   number: "NMLS ID # 1544045",   color: "border-teal-200 bg-teal-50" },
-  { name: "SSL/TLS",     full: "256-bit Encryption",                       number: "Bank-Grade Security", color: "border-ax-green-200 bg-ax-green-50" },
-  { name: "State Lic.",  full: "State Money Transmitter Licenses",         number: "Multi-State",         color: "border-navy-300 bg-navy-50" },
+  { name: "FinCEN",       full: "US Treasury — Financial Crimes Enforcement Network", number: "Registered Money Services Business", color: "border-navy-300 bg-navy-50" },
+  { name: "NMLS",         full: "Nationwide Multistate Licensing System",              number: "NMLS ID # 1544045",                  color: "border-teal-200 bg-teal-50" },
+  { name: "Encryption",   full: "256-bit SSL/TLS Encryption",                          number: "All transfers fully encrypted",      color: "border-ax-green-200 bg-ax-green-50" },
+  { name: "State Lic.",   full: "State Money Transmitter Licenses",                    number: "Licensed in 9+ US states",           color: "border-navy-300 bg-navy-50" },
 ];
 
 const licensedStates = [
@@ -246,11 +246,11 @@ export default function AboutPage() {
                     Nationwide Coverage
                   </p>
                   <h3 className="font-heading font-extrabold text-navy-800 text-2xl sm:text-3xl mb-3">
-                    Licensed Money Transmitter Across the USA
+                    Government-Licensed to Send Money Across the USA
                   </h3>
                   <p className="text-gray-500 text-base max-w-2xl mx-auto">
-                    Atlantic Xchange is a licensed money transmitter in a growing number of US states,
-                    with additional regulatory authorization in New York and Georgia.
+                    Atlantic Xchange is officially licensed to operate as a money transmitter in multiple US states.
+                    This means your transfers are legally protected and fully regulated at every step.
                   </p>
                 </div>
 
